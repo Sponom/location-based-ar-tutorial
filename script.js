@@ -5,13 +5,13 @@ window.onload = () => {
 
 function staticLoadPlaces() {
   return [
-    {
-      name: "Magnemite",
-      location: {
-        lat: 57.988323,
-        lng: 56.213772,
-      },
-    },
+    // {
+    //   name: "Magnemite",
+    //   location: {
+    //     lat: 57.988323,
+    //     lng: 56.213772,
+    //   },
+    // },
     {
       name: "5ka",
       location: {
@@ -26,22 +26,59 @@ function renderPlaces(places) {
   let scene = document.querySelector("a-scene");
 
   places.forEach((place) => {
-    let latitude = place.location.lat;
-    let longitude = place.location.lng;
-    let title = place.name;
+    const latitude = place.location.lat;
+    const longitude = place.location.lng;
 
-    let text = document.createElement("a-link");
+    // add place icon
+    const icon = document.createElement('a-image');
+    icon.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude}`);
+    icon.setAttribute('name', place.name);
+    icon.setAttribute('src', './assets/map-marker.png');
 
-    text.setAttribute("title", title);
-    text.setAttribute("look-at", "[gps-camera]");
-    text.setAttribute("scale", "15 15 15");
-    text.setAttribute(
+    // for debug purposes, just show in a bigger scale, otherwise I have to personally go on places...
+    icon.setAttribute('scale', '20, 20');
+
+    icon.addEventListener('loaded', () => window.dispatchEvent(new CustomEvent('gps-entity-place-loaded')));
+
+    const clickListener = function (ev) {
+        ev.stopPropagation();
+        ev.preventDefault();
+
+        const name = ev.target.getAttribute('name');
+
+        const el = ev.detail.intersection && ev.detail.intersection.object.el;
+
+        if (el && el === ev.target) {
+            const label = document.createElement('span');
+            const container = document.createElement('div');
+            container.setAttribute('id', 'place-label');
+            label.innerText = name;
+            container.appendChild(label);
+            document.body.appendChild(container);
+
+            setTimeout(() => {
+                container.parentElement.removeChild(container);
+            }, 1500);
+        }
+    };
+
+    icon.addEventListener('click', clickListener);
+
+    scene.appendChild(icon);
+
+    // add place name
+    const placeText = document.createElement("a-link");
+    placeText.setAttribute(
       "gps-entity-place",
       `latitude: ${latitude}; longitude: ${longitude};`
     );
-    text.addEventListener("loaded", () => {
+    placeText.setAttribute("title", place.name);
+    placeText.setAttribute("scale", "15 15 15");
+
+    placeText.addEventListener("loaded", () => {
       window.dispatchEvent(new CustomEvent("gps-entity-place-loaded"));
     });
-    scene.appendChild(text);
+
+    scene.appendChild(placeText);
   });
 }
