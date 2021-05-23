@@ -15,8 +15,8 @@ function staticLoadPlaces() {
     {
       name: "another shop",
       location: {
-        lat: 57.985635,
-        lng: 56.213289,
+        lat: 57.984935,
+        lng: 56.210375,
       },
     },
   ];
@@ -29,18 +29,16 @@ function renderPlaces(places) {
     const latitude = place.location.lat;
     const longitude = place.location.lng;
 
-    // add place name
-    const placeText = document.createElement("a-link");
-    placeText.setAttribute(
-      "gps-entity-place",
-      `latitude: ${latitude}; longitude: ${longitude};`
-    );
-    placeText.setAttribute("title", place.name);
-    placeText.setAttribute("scale", "15 15 15");
+    // add place icon
+    const icon = document.createElement('a-image');
+    icon.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude}`);
+    icon.setAttribute('name', place.name);
+    icon.setAttribute('src', './assets/map-marker.png');
 
-    placeText.addEventListener("loaded", () => {
-      window.dispatchEvent(new CustomEvent("gps-entity-place-loaded"));
-    });
+    // for debug purposes, just show in a bigger scale, otherwise I have to personally go on places...
+    icon.setAttribute('scale', '40, 40');
+
+    icon.addEventListener('loaded', () => window.dispatchEvent(new CustomEvent('gps-entity-place-loaded')));
 
     const clickListener = function (ev) {
         ev.stopPropagation();
@@ -64,9 +62,9 @@ function renderPlaces(places) {
         }
     };
 
-    placeText.addEventListener('click', clickListener);
+    icon.addEventListener('click', clickListener);
 
+    scene.appendChild(icon);
 
-    scene.appendChild(placeText);
   });
 }
