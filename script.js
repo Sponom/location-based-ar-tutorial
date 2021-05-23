@@ -5,18 +5,18 @@ window.onload = () => {
 
 function staticLoadPlaces() {
   return [
-    // {
-    //   name: "Magnemite",
-    //   location: {
-    //     lat: 57.988323,
-    //     lng: 56.213772,
-    //   },
-    // },
+    {
+      name: "Home",
+      location: {
+        lat: 57.988231,
+        lng: 56.213654,
+      },
+    },
     {
       name: "5ka",
       location: {
-        lat: 57.987346,
-        lng: 56.214411,
+        lat: 57.987059,
+        lng: 56.214365,
       },
     },
   ];
