@@ -7,18 +7,18 @@ function staticLoadPlaces() {
   return [
     {
       minPrice: 41000000,
-      lat: 55.69914616178205,
-      lng: 37.934959582328794,
+      lat: 57.987895,
+      lng: 56.212851,
     },
     {
       minPrice: 41000000,
-      lat: 55.7774789259,
-      lng: 37.6232679002,
+      lat: 57.987757,
+      lng: 56.213606,
     },
     {
-      minPrice: 34000000,
-      lat: 55.7770489343,
-      lng: 37.622395847,
+      minPrice: 41000000,
+      lat: 57.987705,
+      lng: 56.211306,
     },
     {
       minPrice: 9850000,
@@ -112,15 +112,17 @@ function renderPlaces(places) {
       `latitude: ${latitude}; longitude: ${longitude}`
     );
     icon.setAttribute("name", place.minPrice);
-    icon.setAttribute("src", "./assets/marker.svg");
+    icon.setAttribute("src", "./assets/pin.svg");
+    icon.setAttribute("width", "5");
+    icon.setAttribute("height", "5");
+
 
     // for debug purposes, just show in a bigger scale, otherwise I have to personally go on places...
-    icon.setAttribute("scale", "30, 30");
 
     icon.addEventListener("loaded", () =>
       window.dispatchEvent(new CustomEvent("gps-entity-place-loaded"))
     );
-
+    
     // const clickListener = function (ev) {
     //   ev.stopPropagation();
     //   ev.preventDefault();
