@@ -7,6 +7,11 @@ function staticLoadPlaces() {
   return [
     {
       minPrice: 41000000,
+      lat: 55.69914616178205,
+      lng: 37.934959582328794,
+    },
+    {
+      minPrice: 41000000,
       lat: 55.7774789259,
       lng: 37.6232679002,
     },
@@ -107,7 +112,7 @@ function renderPlaces(places) {
       `latitude: ${latitude}; longitude: ${longitude}`
     );
     icon.setAttribute("name", place.minPrice);
-    icon.setAttribute("src", "./assets/map-marker.png");
+    icon.setAttribute("src", "./assets/marker.png");
 
     // for debug purposes, just show in a bigger scale, otherwise I have to personally go on places...
     icon.setAttribute("scale", "30, 30");
