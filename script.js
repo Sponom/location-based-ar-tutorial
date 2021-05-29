@@ -7,18 +7,18 @@ function staticLoadPlaces() {
   return [
     {
       minPrice: 41000000,
-      lat: 57.987895,
-      lng: 56.212851,
+      lat: 57.989141,
+      lng: 56.214657,
     },
     {
       minPrice: 41000000,
-      lat: 57.987757,
-      lng: 56.213606,
+      lat: 57.989198,
+      lng: 56.213813,
     },
     {
       minPrice: 41000000,
-      lat: 57.987705,
-      lng: 56.211306,
+      lat: 57.988244,
+      lng: 56.214639,
     },
     {
       minPrice: 9850000,
