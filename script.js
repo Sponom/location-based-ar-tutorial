@@ -112,7 +112,7 @@ function renderPlaces(places) {
       `latitude: ${latitude}; longitude: ${longitude}`
     );
     icon.setAttribute("name", place.minPrice);
-    icon.setAttribute("src", "./assets/marker.png");
+    icon.setAttribute("src", "./assets/marker.svg");
 
     // for debug purposes, just show in a bigger scale, otherwise I have to personally go on places...
     icon.setAttribute("scale", "30, 30");
